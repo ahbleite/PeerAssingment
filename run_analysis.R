@@ -81,14 +81,15 @@ totalData$subject <- as.factor(totalData$subject)
 totalData$activity <- as.factor(totalData$activity)
 
 # 4 - Appropriately labels the data set with descriptive variable names.
-names(totalData)<-gsub("^t", "Time-", names(totalData))
-names(totalData)<-gsub("^f", "Frequency-", names(totalData))
+names(totalData)<-gsub("^t", "Time", names(totalData))
+names(totalData)<-gsub("^f", "Frequency", names(totalData))
+names(totalData)<-gsub("BodyBody", "Body", names(totalData), fixed = TRUE)
 names(totalData)<-gsub("Acc", "LinearAcceleration", names(totalData), fixed=TRUE)
 names(totalData)<-gsub("Gyro", "AngularVelocity", names(totalData), fixed=TRUE)
 names(totalData)<-gsub("mean()", "Mean", names(totalData), fixed=TRUE)
 names(totalData)<-gsub("std()", "StandardDeviation", names(totalData), fixed=TRUE)
 names(totalData)<-gsub("Mag", "Magnitude", names(totalData), fixed=TRUE)
-#names(totalData)<-gsub("-", "", names(totalData), fixed=TRUE)
+names(totalData)<-gsub("-", "", names(totalData), fixed=TRUE)
 
 # 5 - From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 #calculate the mean
@@ -98,10 +99,9 @@ totalData <- totalData %>%
 
 #tidy the data
 totalData <- gather(totalData, feature, mean, -subject, -activity)
-totalData <-  suppressWarnings(separate(totalData, feature, into = c("signaltype", "feature", "appliedfunction", "axis"), sep = "-" ))
 
 #save the tidy data
-write.table(totalData, row.names = FALSE, file = "data.txt")
+write.table(totalData, row.names = FALSE, file = "tidydata.txt")
 
 
 
