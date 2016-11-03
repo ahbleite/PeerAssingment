@@ -6,26 +6,26 @@ To create the tidy data the following procedures were applied.
 1) Merge all the training data and the testing data in one dataset:
 
 ```
-\#get the features
+#get the features
 features <- read_delim("UCI HAR Dataset/features.txt", 
                        delim = " ",
                        col_names = c("id", "name"))
 
-\#get the activities
+#get the activities
 activities <- read_table("UCI HAR Dataset/activity_labels.txt", 
                          col_names = c("id", "activity"))
 
-\#get training subject data
+#get training subject data
 trainSubjects <- read_table("UCI HAR Dataset/train/subject_train.txt",
                             col_names = c("subject"),
                             col_types = cols(.default = col_integer()))
 
-\#get training activities data
+#get training activities data
 trainActivities <- read_table("UCI HAR Dataset/train/y_train.txt",
                               col_names = c("id"),
                               col_types = cols(.default = col_integer()))
 
-\#get training measurement data
+#get training measurement data
 trainData <- read_table("UCI HAR Dataset/train/X_train.txt", 
                         col_types = cols(.default = col_double()),
                         col_names = FALSE,
@@ -33,20 +33,20 @@ trainData <- read_table("UCI HAR Dataset/train/X_train.txt",
 
 names(trainData)<-features$name
 
-\#bind subject, activity and data
+#bind subject, activity and data
 trainData <- cbind(trainSubjects, trainActivities, trainData)
 
-\#get test subject data
+#get test subject data
 testSubjects <- read_table("UCI HAR Dataset/test/subject_test.txt",
                             col_names = c("subject"),
                             col_types = cols(.default = col_integer()))
 
-\#get test activities data
+#get test activities data
 testActivities <- read_table("UCI HAR Dataset/test/y_test.txt",
                               col_names = c("id"),
                               col_types = cols(.default = col_integer()))
 
-\#get test measurement data
+#get test measurement data
 testData <- read_table("UCI HAR Dataset/test/X_test.txt", 
                        col_types = cols(.default = col_double()),
                        col_names = FALSE,
@@ -54,10 +54,10 @@ testData <- read_table("UCI HAR Dataset/test/X_test.txt",
 
 names(testData)<-features$name
 
-\#bind subject, activity and data
+#bind subject, activity and data
 testData <- cbind(testSubjects, testActivities, testData)
 
-\#bind test an training data
+#bind test an training data
 totalData <- rbind(trainData, testData)
 ```
 
