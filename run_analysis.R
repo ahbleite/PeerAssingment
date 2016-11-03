@@ -70,7 +70,7 @@ testData <- cbind(testSubjects, testActivities, testData)
 #bind test an training data
 totalData <- rbind(trainData, testData)
 
-# 2 - Extracts only the totalData on the mean and standard deviation for each measurement.
+# 2 - Extracts only the measurements on the mean and standard deviation for each measurement.
 dataToRetrieve <- grepl("((mean|std)[(][)])|id|subject", names(totalData))
 totalData <- totalData[,dataToRetrieve]
 
